@@ -6,7 +6,7 @@ This project models race strategy decisions by simulating lap times under differ
 
 ---
 
-🔗 Live Demo: https://your-app-url.streamlit.app
+🔗 Live Demo: [https://your-app-url.streamlit.app](https://wec-strategy-analysis-pvnt5bxqsnrpkpt4bwcgtb.streamlit.app/)
 
 ---
 
