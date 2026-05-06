@@ -6,6 +6,10 @@ This project models race strategy decisions by simulating lap times under differ
 
 ---
 
+🔗 Live Demo: https://your-app-url.streamlit.app
+
+---
+
 # Overview
 
 In endurance racing, strategy is a trade-off between:
