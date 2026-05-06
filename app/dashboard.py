@@ -220,22 +220,53 @@ with col3:
 st.divider()
 
 
-st.markdown("### Tire Strategy Timeline")
+st.subheader("Tire Strategy Timeline (Visual)")
 
-timeline_cols = st.columns(len(best_combo))
+fig_tl, ax_tl = plt.subplots(figsize=(12, 2))
 
-for idx, (stint, compound) in enumerate(best_combo):
-    with timeline_cols[idx]:
+start = 0
 
-        icon = compound_icons[compound]
+color_map = {
+    "Soft": "red",
+    "Medium": "gold",
+    "Hard": "black"
+}
 
-        st.markdown(
-            f"""
-            ### {icon} {compound}
-            **Stint {idx+1}**
-            {stint} laps
-            """
-        )
+for stint_length, compound in best_combo:
+    ax_tl.barh(
+        y=0,
+        width=stint_length,
+        left=start,
+        color=color_map[compound],
+        edgecolor="white"
+    )
+
+    # 텍스트 표시
+    ax_tl.text(
+        start + stint_length / 2,
+        0,
+        f"{compound}\n{stint_length}L",
+        ha='center',
+        va='center',
+        color="white" if compound != "Medium" else "black",
+        fontsize=10,
+        fontweight="bold"
+    )
+
+    start += stint_length
+
+# pit line 표시
+pit_lap = 0
+for stint_length, _ in best_combo[:-1]:
+    pit_lap += stint_length
+    ax_tl.axvline(x=pit_lap, linestyle="--", color="blue", alpha=0.7)
+
+ax_tl.set_xlim(0, start)
+ax_tl.set_yticks([])
+ax_tl.set_xlabel("Lap")
+ax_tl.set_title("Race Strategy Timeline")
+
+st.pyplot(fig_tl)
 
 # 2-stop vs 3-stop 상세 비교
 st.subheader("Strategy Decision Insight")
